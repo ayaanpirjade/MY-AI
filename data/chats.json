@@ -1,0 +1,90 @@
+{
+  "demo-user": {
+    "chats": [
+      {
+        "id": "a7079384-b743-45ed-bb34-31e7ac99b48c",
+        "title": "Write a clean Python function that…",
+        "createdAt": "2026-10-06T17:36:53Z",
+        "updatedAt": "2026-10-06T17:37:47Z",
+        "messages": [
+          {
+            "id": "02c1aaf6-b2ea-46f2-b54f-3f79b7cdc756",
+            "role": "user",
+            "content": "Write a clean Python function that…",
+            "createdAt": "2026-10-06T17:36:53Z"
+          },
+          {
+            "id": "a5e09e77-d5bd-4454-8072-de0b9d507777",
+            "role": "assistant",
+            "content": "Sure! Could you let me know what the function should do (its purpose, inputs, and expected output)? That’ll help me write exactly what you need.",
+            "createdAt": "2026-10-06T17:36:54Z"
+          },
+          {
+            "id": "45e7a2b3-909c-49c4-b08e-820bb3a2b3fb",
+            "role": "user",
+            "content": "AUTOMATE THE USER MSG",
+            "createdAt": "2026-10-06T17:37:13Z"
+          },
+          {
+            "id": "6a0a539e-abf1-4705-9c0e-cbf0b563e68c",
+            "role": "assistant",
+            "content": "Below is a **self‑contained, clean Python function** that automatically generates a reply for a user’s message.  \nIt works with a simple keyword‑based intent map, but you can easily swap in a more sophisticated NLP model later.\n\n```python\nimport re\nfrom typing import Callable, Dict, List, Tuple\n\ndef auto_reply(\n    message: str,\n    *,\n    intent_map: Dict[str, str] | Callable[[str], str] | None = None,\n    default_reply: str = \"I’m not sure how to help with that. Could you elaborate?\"\n) -> str:\n    \"\"\"\n    Generate an automated reply based on the content of *message*.\n\n    Parameters\n    ----------\n    message: str\n        The raw text received from the user.\n    intent_map: dict | callable | None, optional\n        - If a dict, keys are regular‑expression patterns (case‑insensitive) and\n          values are the corresponding reply strings.\n        - If a callable, it must accept the message and return a reply string.\n        - If ``None`` (default), a built‑in simple pattern map is used.\n    default_reply: str, optional\n        Reply to fall back on when no pattern matches.\n\n    Returns\n    -------\n    str\n        The automated response.\n\n    Example\n    -------\n    >>> auto_reply(\"Hi there!\")\n    'Hello! How can I assist you today?'\n    \"\"\"\n    # ------------------------------------------------------------------\n    # 1️⃣  Default pattern → reply mapping (simple but useful)\n    # ------------------------------------------------------------------\n    if intent_map is None:\n        intent_map = {\n            r\"\\bhi\\b|\\bhello\\b|\\bhey\\b\": \"Hello! How can I assist you today?\",\n            r\"\\bthanks?\\b|\\bthank you\\b\": \"You’re welcome! Let me know if you need anything else.\",\n            r\"\\bbye\\b|\\bgoodbye\\b\": \"Goodbye! Have a great day.\",\n            r\"\\bhelp\\b|\\bsupport\\b\": \"Sure, I’m here to help. What do you need assistance with?\",\n            r\"\\bprice\\b|\\bcost\\b\": \"Our pricing details are available on the website. Which product are you interested in?\",\n        }\n\n    # ------------------------------------------------------------------\n    # 2️⃣  If a custom callable was supplied, delegate to it\n    # ------------------------------------------------------------------\n    if callable(intent_map):\n        return intent_map(message)\n\n    # ------------------------------------------------------------------\n    # 3️⃣  Search the patterns (case‑insensitive) and return the first match\n    # ------------------------------------------------------------------\n    for pattern, reply in intent_map.items():\n        if re.search(pattern, message, flags=re.IGNORECASE):\n            return reply\n\n    # ------------------------------------------------------------------\n    # 4️⃣  No pattern matched → fallback\n    # ------------------------------------------------------------------\n    return default_reply\n\n\n# ----------------------------------------------------------------------\n# Example usage\n# ----------------------------------------------------------------------\nif __name__ == \"__main__\":\n    test_messages: List[str] = [\n        \"Hi, I need some info.\",\n        \"Can you tell me the price of the Pro plan?\",\n        \"Thanks for the help!\",\n        \"I would like to speak with support.\",\n        \"Random gibberish\",\n    ]\n\n    for msg in test_messages:\n        print(f\"User: {msg}\\nBot:  {auto_reply(msg)}\\n\")\n```\n\n### How it works\n1. **Pattern map** – A dictionary where each key is a regular‑expression pattern (case‑insensitive) and the value is the canned reply.\n2. **Custom logic** – If you pass a callable instead of a dict, you can plug in any NLP model or API call.\n3. **Fallback** – When nothing matches, a generic “I don’t understand” message is returned.\n\n### Extending it\n- **Add more patterns**: just extend the `intent_map` dictionary.\n- **Use an NLP library**: replace the dict with a function that calls `spaCy`, `transformers`, etc.\n- **Return richer data**: change the return type to a `Tuple[str, dict]` if you need to send extra metadata (e.g., suggested actions).\n\nFeel free to adapt the function to the exact workflow you have in mind!",
+            "createdAt": "2026-10-06T17:37:16Z"
+          },
+          {
+            "id": "c6e1e18a-03b4-4ee8-83fb-d1cd08f96c32",
+            "role": "user",
+            "content": "WHO MADE YOU",
+            "createdAt": "2026-10-06T17:37:46Z"
+          },
+          {
+            "id": "a897a1bd-8d01-4f61-9fe0-dae7d122e20d",
+            "role": "assistant",
+            "content": "I was created by the research and engineering teams at **OpenAI**.",
+            "createdAt": "2026-10-06T17:37:47Z"
+          }
+        ]
+      },
+      {
+        "id": "0829ad5a-21a4-4de3-a832-ad21e8f45cef",
+        "title": "Summarize this concept and give examples",
+        "createdAt": "2026-10-06T17:35:09Z",
+        "updatedAt": "2026-10-06T17:35:10Z",
+        "messages": [
+          {
+            "id": "f4cbac34-aae7-47f0-b766-d8a63876b562",
+            "role": "user",
+            "content": "Summarize this concept and give examples",
+            "createdAt": "2026-10-06T17:35:09Z"
+          },
+          {
+            "id": "926fedfa-de5a-4609-add1-af39b45e5e7b",
+            "role": "assistant",
+            "content": "Sure! Could you let me know which concept you’d like summarized? Once I have the topic, I’ll give you a concise overview and some examples.",
+            "createdAt": "2026-10-06T17:35:10Z"
+          }
+        ]
+      },
+      {
+        "id": "87b8f216-6468-4935-b32b-f54d366e1403",
+        "title": "Explain a complex topic simply",
+        "createdAt": "2026-10-06T17:34:59Z",
+        "updatedAt": "2026-10-06T17:35:02Z",
+        "messages": [
+          {
+            "id": "09c4b524-a07f-4e8f-88d4-606c33c0ce94",
+            "role": "user",
+            "content": "Explain a complex topic simply",
+            "createdAt": "2026-10-06T17:34:59Z"
+          },
+          {
+            "id": "44a8842c-ded2-4907-9810-9658694a729b",
+            "role": "assistant",
+            "content": "## How a Neural Network Learns – Explained in Simple Terms  \n\nImagine you’re teaching a child to recognize pictures of cats and dogs. You show many images, tell the child which is which, and over time the child gets better at spotting the differences. A neural network works almost the same way, just with math instead of a brain.\n\n---\n\n### 1. The basic parts  \n\n| Part | What it does (in plain language) |\n|------|-----------------------------------|\n| **Neuron (node)** | A tiny decision‑maker that adds up inputs and decides whether to “fire” (output a signal). |\n| **Layer** | A group of neurons that work together. Early layers spot simple patterns (edges, colors); deeper layers combine them into complex ideas (faces, objects). |\n| **Weights** | Numbers that tell a neuron how important each input is—like a volume knob for each clue. |\n| **Bias** | An extra knob that lets a neuron fire even when all inputs are zero, giving it flexibility. |\n| **Activation function** | A rule that turns the summed input into a final output (e.g., “if the total is high enough, say 1; otherwise 0”). |\n\n---\n\n### 2. Learning by trial and error (the **training** process)\n\n1. **Show a picture** – The network receives pixel values as inputs.  \n2. **Make a guess** – The inputs travel through the layers, get weighted, summed, and finally produce an output (e.g., “cat = 0.73, dog = 0.27”).  \n3. **Check the answer** – Compare the guess to the true label (cat = 1, dog = 0). The difference is the **error**.  \n4. **Adjust the knobs** – Using a method called **back‑propagation**, the network figures out how each weight contributed to the error and nudges the weights a little in the direction that would reduce the error next time.  \n5. **Repeat** – Do this for thousands or millions of pictures. Over time the weights settle into values that make the network’s guesses very accurate.\n\n*Analogy*: Think of a child learning to balance a bike. Each wobble (error) tells the child how to shift weight (adjust knobs) to stay steadier. After many tries, the child rides smoothly.\n\n---\n\n### 3. Why it works  \n\n- **Pattern stacking**: Early layers learn simple features (edges), later layers combine them into higher‑level concepts (eyes, ears, whole faces).  \n- **Gradient descent**: The “nudge” step follows the steepest downhill direction in error space, gradually finding the lowest point (best performance).  \n- **Lots of data**: The more examples the network sees, the better it can generalize to new, unseen images.\n\n---\n\n### 4. A tiny visual example  \n\n```\nInput (pixels) → [Layer 1: edges] → [Layer 2: shapes] → [Layer 3: objects] → Output (cat/dog)\n```\n\nEach arrow represents a set of weighted connections that get tuned during training.\n\n---\n\n### TL;DR  \n\nA neural network is a stack of simple math units (neurons) with adjustable “volume knobs” (weights). It learns by repeatedly guessing, checking the error, and tweaking the knobs a little each time—much like a child improving at a skill through practice. After enough practice on many examples, the network becomes good at recognizing patterns it has never seen before.",
+            "createdAt": "2026-10-06T17:35:02Z"
+          }
+        ]
+      }
+    ]
+  }
+}
