@@ -1,0 +1,10 @@
+{
+  "demo-user": {
+    "email": "demo@myai.local",
+    "name": "Demo User",
+    "salt": "7f1ab90866cae9137758b3732ee0478a",
+    "password_hash": "a4ce71eab1875f4e8759ba39a275f7ffb88d8f0e39b361e470b09ab737cfeb2a",
+    "createdAt": "2026-10-06T17:34:57Z",
+    "demo": true
+  }
+}
